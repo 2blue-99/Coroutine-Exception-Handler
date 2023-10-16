@@ -1,27 +1,27 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("dagger.hilt.android.plugin")
-    id("kotlin-kapt")
+    id(Plugins.Path.AndroidLibrary)
+    id(Plugins.Path.JetBrainsKotlinAndroid)
+    id(Plugins.NameTag.DaggerHiltAndroid)
+    id(Plugins.NameTag.KotlinKAPT)
 }
 
 android {
-    namespace = "com.example.data"
-    compileSdk = 33
+    namespace = Plugins.Path.AppNameSpace
+    compileSdk = AppConfig.CompileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = AppConfig.MinSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+        testInstrumentationRunner = AppConfig.TestInstrumentationRunner
+        consumerProguardFiles(AppConfig.ConsumerProguardRules)
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile(AppConfig.DefaultProguardFile),
+                AppConfig.ProguardRules
             )
         }
     }
@@ -30,7 +30,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AppConfig.JvmTarget
     }
 }
 

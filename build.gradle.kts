@@ -1,16 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-//
-//buildscript {
-//    dependencies {
-//        classpath ("com.google.dagger:hilt-android-gradle-plugin:2.46.1")
-//    }
-//}
 
 plugins {
-    id("com.android.application") version ("8.1.2") apply(false)
-    id("org.jetbrains.kotlin.android") version ("1.9.0") apply(false)
-    id("com.android.library") version ("8.1.2") apply(false)
-    id("com.google.dagger.hilt.android") version("2.46.1") apply(false)
+    id(Plugins.Path.AndroidApplication) version (Plugins.Version.ANDROID) apply(false)
+    id(Plugins.Path.AndroidLibrary) version(Plugins.Version.ANDROID) apply(false)
+    id(Plugins.Path.JetBrainsKotlinAndroid) version(Plugins.Version.JETBRAINS_KOTLIN_ANDROID) apply(false)
+    id(Plugins.Path.DaggerHiltAndroid) version(Plugins.Version.DAGGER_HILT_ANDROID) apply(false)
 }
 
 tasks.register("clean", Delete::class){

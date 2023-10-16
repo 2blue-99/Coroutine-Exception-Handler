@@ -13,11 +13,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import com.example.basepractice.adapter.MyAdapter
 import com.example.basepractice.databinding.ActivityMainBinding
 import com.example.basepractice.viewModel.MyViewModel
-import com.example.domain.model.MyData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -85,34 +83,16 @@ class MainActivity : AppCompatActivity() {
             else binding.progress.visibility = View.INVISIBLE
         }
 
-        viewModel.fetchState.observe(this) {
-            when (it.first) {
-                is SocketException -> {
-                    binding.progress.isVisible = false
-                    binding.linearLayout2.setBackgroundColor(Color.RED)
-                    binding.errTxt.isVisible = true
-                    binding.errTxt.text = "SocketException"
-                    adapter.dataList = emptyList<MyData>().toMutableList()
-                    Toast.makeText(this, "${it.second}", Toast.LENGTH_SHORT).show()
-                }
+        viewModel.fetchState.observe(this){
+            when(it.first) {
+                is SocketException ->
+                    exceptionControl(true, true, Color.BLUE, "SocketException", "SocketException 에러 발생!")
 
-                is TimeoutException -> {
-                    binding.progress.isVisible = false
-                    binding.linearLayout2.setBackgroundColor(Color.BLUE)
-                    binding.errTxt.isVisible = true
-                    binding.errTxt.text = "TimeOutException"
-                    adapter.dataList = emptyList<MyData>().toMutableList()
-                    Toast.makeText(this, "${it.second}", Toast.LENGTH_SHORT).show()
-                }
+                is TimeoutException ->
+                    exceptionControl(false, true, Color.RED, "TimeoutException", "TimeoutException 에러 발생!")
 
-                is UnknownHostException -> {
-                    binding.progress.isVisible = false
-                    binding.linearLayout2.setBackgroundColor(Color.BLUE)
-                    binding.errTxt.isVisible = true
-                    binding.errTxt.text = "TimeOutException"
-                    adapter.dataList = emptyList<MyData>().toMutableList()
-                    Toast.makeText(this, "${it.second}", Toast.LENGTH_SHORT).show()
-                }
+                is UnknownHostException ->
+                    exceptionControl(true, false, Color.WHITE, "UnknownHostException", "UnknownHostException 에러 발생!")
 
                 is HttpException -> {
                     when((it.first as HttpException).code()){
@@ -125,27 +105,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                else -> {}
+                else -> {
+                    exceptionControl(true, false, Color.WHITE, "알수없는 에러 발생!", "알수없는 에러 발생!")
+                }
             }
         }
-
-
-//        viewModel.fetchState.observe(this){
-//            when(it.first) {
-//                is SocketException ->
-//                    exceptionControl(true, true, Color.BLUE, "SocketException", "SocketException 에러 발생!")
-//
-//                is TimeoutException ->
-//                    exceptionControl(false, true, Color.RED, "TimeoutException", "TimeoutException 에러 발생!")
-//
-//                is UnknownHostException ->
-//                    exceptionControl(true, false, Color.WHITE, "UnknownHostException", "UnknownHostException 에러 발생!")
-//
-//                else -> {
-//                    exceptionControl(true, false, Color.WHITE, "알수없는 에러 발생!", "알수없는 에러 발생!")
-//                }
-//            }
-//        }
 
 
 
