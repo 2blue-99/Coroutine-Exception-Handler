@@ -9,4 +9,3 @@ data class ServerResponse(
     val userId: String
 )
 
-fun ServerResponse.toMyData(): MyData = MyData(completed, id, title, userId)

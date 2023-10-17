@@ -2,7 +2,6 @@ package com.example.data.di
 
 import com.example.data.repoImpl.RepoImpl
 import com.example.domain.repo.Repo
-import com.example.domain.useCase.FlowUseCase
 import com.example.domain.useCase.UseCase
 import dagger.Module
 import dagger.Provides
@@ -23,9 +22,4 @@ object UseCaseModule {
     @Singleton
     fun provideGetApiUseCase(repo : Repo) : UseCase =
         UseCase(repo)
-
-    @Provides
-    @Singleton
-    fun provideGetFlowApiUseCase(repo : Repo) : FlowUseCase =
-        FlowUseCase(repo)
 }

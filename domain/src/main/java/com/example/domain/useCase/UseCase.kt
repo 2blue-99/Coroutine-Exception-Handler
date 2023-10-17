@@ -2,6 +2,9 @@ package com.example.domain.useCase
 
 import com.example.domain.model.MyData
 import com.example.domain.repo.Repo
+import com.example.domain.state.ResourceState
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
 * 2023-10-10
@@ -9,7 +12,10 @@ import com.example.domain.repo.Repo
 */class UseCase(
     private val repo: Repo
 ) {
-    suspend operator fun invoke(id: Int): MyData {
-        return repo.getAPIRepo(id)
+    operator fun invoke(id: String): Flow<ResourceState<MyData>> {
+        return flow {
+            emit(ResourceState.Loading())
+            emit(repo.getAPIRepo(id))
+        }
     }
 }

@@ -11,24 +11,8 @@ import retrofit2.http.Path
  * pureum
  */
 interface DataSource {
-
     @GET("todos/{id}")
     suspend fun getApiDataSource(
         @Path("id") id: String
     ):Response<ServerResponse>
-
-    @GET("todos/{id}")
-    suspend fun getApiFlowDataSource(
-        @Path("id") id: String
-    ): ServerResponse
-
-    @GET("todos/{id}")
-    suspend fun getApiResponseDataSource(
-        @Path("id") id: String
-    ): Response<ServerResponse>
-
-    @GET("todos/{id}")
-    suspend fun getApiResponseSealedDataSource(
-        @Path("id") id: String
-    ): Response<ServerResponse>
 }

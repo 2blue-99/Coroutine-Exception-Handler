@@ -16,13 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.basepractice.adapter.MyAdapter
 import com.example.basepractice.databinding.ActivityMainBinding
 import com.example.basepractice.viewModel.MyViewModel
+import com.example.domain.state.ResourceState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.net.SocketException
-import java.net.UnknownHostException
-import java.util.concurrent.TimeoutException
 
 
 @AndroidEntryPoint
@@ -31,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MyViewModel by viewModels()
     private val adapter: MyAdapter by lazy { MyAdapter() }
     private lateinit var binding: ActivityMainBinding
+    private var count = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,84 +40,40 @@ class MainActivity : AppCompatActivity() {
         initRecycler()
     }
 
-    private fun initListener() {
+    private fun initListener(){
         binding.btn.setOnClickListener {
-            // liveData
-//            viewModel.getApiData()
-
-            //flow
-            viewModel.getFlowApiData()
+            viewModel.getApiData("${count++}")
         }
 
         binding.refresh.setOnRefreshListener {
             binding.refresh.isRefreshing = false
             adapter.dataList.clear()
-            viewModel.getApiData()
-        }
-
-        binding.socketException.setOnClickListener {
-            viewModel.getSocketException()
-        }
-
-        binding.timeout.setOnClickListener {
-            viewModel.getTimeOutException()
+            viewModel.getApiData("${count++}")
         }
     }
 
     private fun initObserver() {
-        viewModel.liveData.observe(this) {
-            val newList = adapter.dataList
-            newList.add(it)
-            adapter.dataList = newList
-        }
 
         viewModel.loading.observe(this) {
             if (it) binding.progress.visibility = View.VISIBLE
             else binding.progress.visibility = View.INVISIBLE
         }
 
-        viewModel.fetchState.observe(this){
-            when(it.first) {
-                is SocketException ->
-                    exceptionControl(true, true, Color.BLUE, "SocketException", "SocketException 에러 발생!")
-
-                is TimeoutException ->
-                    exceptionControl(false, true, Color.RED, "TimeoutException", "TimeoutException 에러 발생!")
-
-                is UnknownHostException ->
-                    exceptionControl(true, false, Color.WHITE, "UnknownHostException", "UnknownHostException 에러 발생!")
-
-                is HttpException -> {
-                    when((it.first as HttpException).code()){
-                        400 -> {}
-                        401 -> {}
-                        402 -> {}
-                        403 -> {}
-                        404 -> {}
-                        else -> {}
-                    }
-                }
-
-                else -> {
-                    exceptionControl(true, false, Color.WHITE, "알수없는 에러 발생!", "알수없는 에러 발생!")
-                }
-            }
-        }
-
-
-
-
-
         /// Flow
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.response.collectLatest {
+                viewModel.myChannel.collectLatest {
+                    when(it){
+                        is ResourceState.Success -> {
+                            adapter.dataList.add(it.data) // TODO 이렇게 넣으면 값이 안바뀜
+                        }
+                        is ResourceState.Error -> {
+                            Toast.makeText(applicationContext, "${it.failure}", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
 
-
-
-                    val newList = adapter.dataList
-                    newList.add(it)
-                    adapter.dataList = newList
+                        }
+                    }
                 }
             }
         }
