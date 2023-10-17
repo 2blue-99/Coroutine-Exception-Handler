@@ -4,9 +4,9 @@ import com.example.domain.model.MyData
 
 data class ServerResponse(
     val completed: Boolean,
-    val id: Int,
+    val id: String,
     val title: String,
-    val userId: Int
+    val userId: String
 )
 
-fun ServerResponse.toMyData(): MyData = MyData(completed, id.toString(), title, userId.toString())
+fun ServerResponse.toMyData(): MyData = MyData(completed, id, title, userId)

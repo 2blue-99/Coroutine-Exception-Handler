@@ -33,7 +33,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MyViewModel @Inject constructor(
     private val useCase: UseCase,
-    private val flowUseCase: FlowUseCase
+    private val flowUseCase: FlowUseCase,
 //    private val useCase: UseCase,
 ) : BaseViewModel() {
 
@@ -69,10 +69,6 @@ class MyViewModel @Inject constructor(
     }
 
 
-
-
-
-
     /// Flow
     private var _response = MutableStateFlow(MyData(true, "", "", ""))
     val response: StateFlow<MyData> get() = _response
@@ -80,12 +76,9 @@ class MyViewModel @Inject constructor(
     fun getFlowApiData() {
         modelScope.launch {
             flowUseCase.invoke()
-                .collectLatest {
-                    if(it.id=="-1") isLoading.postValue(true)
-                    else {
-                        isLoading.postValue(false)
-                        _response.value = it
-                    }
+                .collect {
+                    isLoading.postValue(false)
+                    _response.value = it
                 }
         }
     }

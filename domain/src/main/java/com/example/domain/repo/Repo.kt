@@ -1,6 +1,7 @@
 package com.example.domain.repo
 
 import com.example.domain.model.MyData
+import com.example.domain.state.ResourceState
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -8,9 +9,5 @@ import kotlinx.coroutines.flow.Flow
  * pureum
  */
 interface Repo {
-    suspend fun getAPIRepo(id: Int): MyData
-
-    fun getAPIFlowRepo(): Flow<MyData>
-
-
+    suspend fun getAPIRepo(id: String): ResourceState<MyData>
 }

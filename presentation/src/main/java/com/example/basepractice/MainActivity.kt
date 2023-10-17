@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
         initObserver()
         initListener()
         initRecycler()
@@ -46,14 +45,10 @@ class MainActivity : AppCompatActivity() {
     private fun initListener() {
         binding.btn.setOnClickListener {
             // liveData
-            viewModel.getApiData()
+//            viewModel.getApiData()
 
             //flow
-//            viewModel.getFlowApiData()
-
-            // Response
-
-            binding.btn.isClickable = false
+            viewModel.getFlowApiData()
         }
 
         binding.refresh.setOnRefreshListener {

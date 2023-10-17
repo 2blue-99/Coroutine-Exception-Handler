@@ -12,10 +12,10 @@ import retrofit2.http.Path
  */
 interface DataSource {
 
-    @GET("todos______/{id}")
+    @GET("todos/{id}")
     suspend fun getApiDataSource(
         @Path("id") id: String
-    ):ServerResponse
+    ):Response<ServerResponse>
 
     @GET("todos/{id}")
     suspend fun getApiFlowDataSource(
