@@ -1,3 +1,119 @@
 <resources>
     <string name="app_name">Base Practice</string>
+
+    <string-array name="placeName_array">
+        <item>강남 MICE 관광특구</item>
+        <item>동대문 관광특구</item>
+        <item>명동 관광특구</item>
+        <item>이태원 관광특구</item>
+        <item>잠실 관광특구</item>
+        <item>종로·청계 관광특구</item>
+        <item>홍대 관광특구</item>
+        <item>경복궁</item>
+        <item>광화문·덕수궁</item>
+        <item>보신각</item>
+        <item>서울 암사동 유적</item>
+        <item>창덕궁·종묘</item>
+        <item>가산디지털단지역</item>
+        <item>강남역</item>
+        <item>건대입구역</item>
+        <item>고덕역</item>
+        <item>고속터미널역</item>
+        <item>교대역</item>
+        <item>구로디지털단지역</item>
+        <item>구로역</item>
+        <item>군자역</item>
+        <item>남구로역</item>
+        <item>대림역</item>
+        <item>동대문역</item>
+        <item>뚝섬역</item>
+        <item>미아사거리역</item>
+        <item>발산역</item>
+        <item>북한산우이역</item>
+        <item>사당역</item>
+        <item>삼각지역</item>
+        <item>서울대입구역</item>
+        <item>서울식물원·마곡나루역</item>
+        <item>서울역</item>
+        <item>선릉역</item>
+        <item>성신여대입구역</item>
+        <item>수유역</item>
+        <item>신논현역·논현역</item>
+        <item>신도림역</item>
+        <item>신림역</item>
+        <item>신촌·이대역</item>
+        <item>양재역</item>
+        <item>역삼역</item>
+        <item>연신내역</item>
+        <item>오목교역·목동운동장</item>
+        <item>왕십리역</item>
+        <item>용산역</item>
+        <item>이태원역</item>
+        <item>장지역</item>
+        <item>장한평역</item>
+        <item>천호역</item>
+        <item>총신대입구(이수)역</item>
+        <item>충정로역</item>
+        <item>합정역</item>
+        <item>혜화역</item>
+        <item>홍대입구역 9번 출구</item>
+        <item>회기역</item>
+        <item>4·19 카페거리</item>
+        <item>가락시장</item>
+        <item>가로수길</item>
+        <item>광장(전통)시장</item>
+        <item>김포공항</item>
+        <item>낙산공원·이화마을</item>
+        <item>노량진</item>
+        <item>덕수궁길·정동길</item>
+        <item>방배역 먹자골목</item>
+        <item>북촌한옥마을</item>
+        <item>서촌</item>
+        <item>성수카페거리</item>
+        <item>수유리 먹자골목</item>
+        <item>쌍문동 맛집거리</item>
+        <item>압구정로데오거리</item>
+        <item>여의도</item>
+        <item>연남동</item>
+        <item>영등포 타임스퀘어</item>
+        <item>외대앞</item>
+        <item>용리단길</item>
+        <item>이태원 앤틱가구거리</item>
+        <item>인사동·익선동</item>
+        <item>창동 신경제 중심지</item>
+        <item>청담동 명품거리</item>
+        <item>청량리 제기동 일대 전통시장</item>
+        <item>해방촌·경리단길</item>
+        <item>DDP(동대문디자인플라자)</item>
+        <item>DMC(디지털미디어시티)</item>
+        <item>강서한강공원</item>
+        <item>고척돔</item>
+        <item>광나루한강공원</item>
+        <item>광화문광장</item>
+        <item>국립중앙박물관·용산가족공원</item>
+        <item>난지한강공원</item>
+        <item>남산공원</item>
+        <item>노들섬</item>
+        <item>뚝섬한강공원</item>
+        <item>망원한강공원</item>
+        <item>반포한강공원</item>
+        <item>북서울꿈의숲</item>
+        <item>불광천</item>
+        <item>서리풀공원·몽마르뜨공원</item>
+        <item>서울대공원</item>
+        <item>서울숲공원</item>
+        <item>시청광장</item>
+        <item>아차산</item>
+        <item>양화한강공원</item>
+        <item>어린이대공원</item>
+        <item>여의도한강공원</item>
+        <item>월드컵공원</item>
+        <item>응봉산</item>
+        <item>이촌한강공원</item>
+        <item>잠실종합운동장</item>
+        <item>잠실한강공원</item>
+        <item>잠원한강공원</item>
+        <item>청계산</item>
+        <item>청와대</item>
+    </string-array>
 </resources>

@@ -15,27 +15,40 @@
         tools:context=".MainActivity">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:background="@color/purple"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/refresh"
                 android:layout_width="match_parent"
-                android:layout_height="500dp">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="wrap_content"
                     tools:listitem="@layout/item" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/lightGray"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/dataTxt"
+                android:text="내용"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
         </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/errTxt"
@@ -45,7 +58,6 @@
             android:textColor="@color/black"
             android:textSize="30dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,42 +67,5 @@
             android:id="@+id/progress"
             android:visibility="invisible" />
 
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-            <Button
-                android:id="@+id/btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="count up" />
-
-            <Button
-                android:id="@+id/socketException"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="SocketException"
-                />
-
-            <Button
-                android:id="@+id/timeout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TimeOutException" />
-
-            <Button
-                android:id="@+id/flow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="flow" />
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

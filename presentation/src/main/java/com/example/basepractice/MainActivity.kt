@@ -41,19 +41,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListener(){
-        binding.btn.setOnClickListener {
-            viewModel.getApiData("김포공항")
+//        binding.refresh.setOnRefreshListener {
+//            binding.refresh.isRefreshing = false
+//            adapter.dataList.clear()
+//            viewModel.getApiData("${count++}")
+//        }
+
+        adapter.onClickRefresh = {
         }
 
-        binding.refresh.setOnRefreshListener {
-            binding.refresh.isRefreshing = false
-            adapter.dataList.clear()
-            viewModel.getApiData("${count++}")
+        adapter.onClickData = {
+            lifecycleScope.launch {
+                adapter.dataList = resources.getStringArray(R.array.placeName_array).toMutableList()
+                viewModel.getApiData(it)
+            }
+
         }
     }
 
     private fun initObserver() {
-
         viewModel.loading.observe(this) {
             if (it) binding.progress.visibility = View.VISIBLE
             else binding.progress.visibility = View.INVISIBLE
@@ -67,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                     when(it){
                         is ResourceState.Success -> {
 //                            adapter.dataList.add(it.data) // TODO 이렇게 넣으면 값이 안바뀜
+                            binding.dataTxt.text = "${it.data}"
                         }
                         is ResourceState.Error -> {
                             Toast.makeText(applicationContext, "${it.failure}", Toast.LENGTH_SHORT).show()
@@ -83,5 +90,6 @@ class MainActivity : AppCompatActivity() {
     private fun initRecycler() {
         binding.recyclerView.layoutManager = LinearLayoutManager(application)
         binding.recyclerView.adapter = adapter
+        adapter.dataList = resources.getStringArray(R.array.placeName_array).toMutableList()
     }
 }
