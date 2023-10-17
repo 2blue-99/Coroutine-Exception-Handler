@@ -1,15 +1,11 @@
 package com.example.data.dataSourceImpl
 
+import android.util.Log
 import com.devsurfer.data.state.ResponseErrorState
 import com.example.data.dataSource.DataSource
 import com.example.data.extension.errorHandler
-import com.example.data.model.ServerResponse
+import com.example.data.model.ServerTestData
 import com.example.domain.state.ResourceState
-import retrofit2.Retrofit
-import retrofit2.create
-import java.io.IOException
-import java.net.SocketException
-import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
 
@@ -21,8 +17,10 @@ class DataSourceImpl @Inject constructor(
     private val retrofit: DataSource
 ) {
 
-    suspend fun getApiDataSource(id: String): ResourceState<ServerResponse> {
-        return when(val response = retrofit.getApiDataSource(id).errorHandler()){
+    suspend fun getApiDataSource(placeName: String): ResourceState<ServerTestData> {
+        val response = retrofit.getApiDataSource(placeName)
+        Log.e("TAG", "getApiDataSource: ${response.body()}")
+        return when(val response = response.errorHandler()){
             is ResponseErrorState.Success ->
                 ResourceState.Success(data = response.data)
             is ResponseErrorState.Error ->

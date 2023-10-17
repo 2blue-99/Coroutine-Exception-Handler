@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initListener(){
         binding.btn.setOnClickListener {
-            viewModel.getApiData("${count++}")
+            viewModel.getApiData("김포공항")
         }
 
         binding.refresh.setOnRefreshListener {
@@ -63,9 +63,10 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.myChannel.collectLatest {
+                    Log.e("TAG", "initObserver: $it", )
                     when(it){
                         is ResourceState.Success -> {
-                            adapter.dataList.add(it.data) // TODO 이렇게 넣으면 값이 안바뀜
+//                            adapter.dataList.add(it.data) // TODO 이렇게 넣으면 값이 안바뀜
                         }
                         is ResourceState.Error -> {
                             Toast.makeText(applicationContext, "${it.failure}", Toast.LENGTH_SHORT).show()
@@ -82,13 +83,5 @@ class MainActivity : AppCompatActivity() {
     private fun initRecycler() {
         binding.recyclerView.layoutManager = LinearLayoutManager(application)
         binding.recyclerView.adapter = adapter
-    }
-
-    private fun exceptionControl(loading: Boolean, empty: Boolean, color: Int, viewText: String="", toast: String=""){
-        binding.progress.isVisible = loading
-        binding.errTxt.isVisible = empty
-        binding.linearLayout2.setBackgroundColor(color)
-        binding.errTxt.text = viewText
-        Toast.makeText(this, "$toast", Toast.LENGTH_SHORT).show()
     }
 }

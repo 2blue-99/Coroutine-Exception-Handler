@@ -1,5 +1,6 @@
 package com.example.data.extension
 
+import android.util.Log
 import com.devsurfer.data.state.ResponseErrorState
 import com.example.domain.util.Constants
 import com.example.domain.state.Failure
@@ -30,9 +31,11 @@ inline fun <reified T: Any> Response<T>.errorHandler(): ResponseErrorState<T> {
         }
     }catch (e: IOException){
         // IOException 인터넷 연결 에러 처리
+        Log.e("TAG", "errorHandler: ${this}", )
         ResponseErrorState.Error(failure = Failure.NetworkConnection)
     }catch (t: Throwable){
         // 알 수 없는 에러 처리
+        Log.e("TAG", "errorHandler: ${this}", )
         ResponseErrorState.Error(failure = Failure.UnHandleError())
     }
 }

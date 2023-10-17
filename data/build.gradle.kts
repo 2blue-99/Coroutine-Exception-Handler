@@ -52,4 +52,10 @@ dependencies {
     implementation(Libraries.Retrofit.Retrofit)
     implementation(Libraries.Retrofit.Retrofit_Converter)
     implementation(Libraries.Retrofit.Okhttp_Logging)
+
+    implementation ("com.tickaroo.tikxml:annotation:0.8.13")
+    implementation ("com.tickaroo.tikxml:core:0.8.13")
+    implementation ("com.tickaroo.tikxml:retrofit-converter:0.8.13")
+    kapt ("com.tickaroo.tikxml:processor:0.8.13")
+    implementation ("org.simpleframework:simple-xml:2.7.1")
 }

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basepractice.databinding.ItemBinding
-import com.example.domain.model.MyData
+import com.example.domain.model.MyTestData
 
 /**
  * 2023-03-22
@@ -15,7 +15,7 @@ import com.example.domain.model.MyData
 class MyAdapter : RecyclerView.Adapter<MyAdapter.MyHolder>() {
 
     private lateinit var cardBinding: ItemBinding
-    var dataList = mutableListOf<MyData>()
+    var dataList = mutableListOf<MyTestData>()
         set(value) {
             field = value.reversed().toMutableList()
             Log.e("TAG", "@@@@@@@@@@@@@ $field: ", )
@@ -24,7 +24,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyHolder>() {
 
     inner class MyHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MyData) {
+        fun bind(item: MyTestData) {
             binding.data = item
         }
     }

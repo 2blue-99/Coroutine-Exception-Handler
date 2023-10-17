@@ -1,6 +1,6 @@
 package com.example.domain.useCase
 
-import com.example.domain.model.MyData
+import com.example.domain.model.MyTestData
 import com.example.domain.repo.Repo
 import com.example.domain.state.ResourceState
 import kotlinx.coroutines.flow.Flow
@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.flow
 */class UseCase(
     private val repo: Repo
 ) {
-    operator fun invoke(id: String): Flow<ResourceState<MyData>> {
+    operator fun invoke(placeName: String): Flow<ResourceState<MyTestData>> {
         return flow {
             emit(ResourceState.Loading())
-            emit(repo.getAPIRepo(id))
+            emit(repo.getAPIRepo(placeName))
         }
     }
 }

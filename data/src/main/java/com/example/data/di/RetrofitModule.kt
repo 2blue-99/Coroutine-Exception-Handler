@@ -2,6 +2,8 @@ package com.example.data.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.tickaroo.tikxml.TikXml
+import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,15 +24,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-    private var gson: Gson = GsonBuilder().setLenient().create()
-
+    private val gson: Gson = GsonBuilder().setLenient().create()
+    private val PRIVATE_KEY = "575a7a59456c706d34374c474c676c"
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl("http://openapi.seoul.go.kr:8088/${PRIVATE_KEY}/xml/")
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(TikXmlConverterFactory.create(TikXml.Builder().exceptionOnUnreadXml(false).build()))
+//            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
     //네트워크 통신 과정을 보기 위한 클라이언트

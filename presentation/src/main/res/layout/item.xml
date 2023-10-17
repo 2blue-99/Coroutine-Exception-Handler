@@ -5,7 +5,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.domain.model.MyData" />
+            type="com.example.domain.model.MyTestData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="@{data.userId, default = `userId`}"
+                        android:text="@{data.areaName, default = `userId`}"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -74,7 +74,7 @@
                         android:id="@+id/recordItem_card_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{data.id, default = `id`}"
+                        android:text="@{data.areaName, default = `id`}"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -94,7 +94,7 @@
                         android:id="@+id/recordItem_store_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{data.title, default = `title`}"
+                        android:text="@{data.areaName, default = `title`}"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>

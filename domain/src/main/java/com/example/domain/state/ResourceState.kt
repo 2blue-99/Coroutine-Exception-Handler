@@ -1,8 +1,5 @@
 package com.example.domain.state
 
-import com.example.domain.model.MyData
-
-
 
 sealed class ResourceState<T>{
     data class Success<T>(val data: T): ResourceState<T>()
