@@ -1,7 +1,5 @@
 package com.example.basepractice
 
-import android.content.Context
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -9,7 +7,6 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -22,6 +19,7 @@ import com.example.basepractice.databinding.ActivityMainBinding
 import com.example.basepractice.viewModel.MyViewModel
 import com.example.domain.state.ResourceState
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -78,7 +76,8 @@ class MainActivity : AppCompatActivity() {
         /// Flow
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.myChannel.collectLatest {
+                viewModel.myStateFlow.collect {
+                    Log.e("TAG", "initObserver: 관찰중!!", )
                     when(it){
                         is ResourceState.Success -> {
                             binding.include.root.isVisible = true
