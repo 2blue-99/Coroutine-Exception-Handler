@@ -15,17 +15,31 @@ import java.io.IOException
 inline fun <reified T: Any> Response<T>.errorHandler(): ResponseErrorState<T> {
     return try{
         when(this.code()){
-            // 401, 404 에러 처리
+            // 에러코드 분기 처리 (401, 404)
             Constants.CODE_UN_AUTHORIZE -> ResponseErrorState.Error(failure = Failure.UnAuthorizeUser)
             Constants.CODE_BAD_REQUEST -> ResponseErrorState.Error(failure = Failure.BadRequest)
             else->{
-                val body = this.body()
-                return if(body == null){
-                    // body null Err -> 알 수 없는 에러 처리
-                    ResponseErrorState.Error(failure = Failure.UnHandleError())
-                }else{
-                    // 정상 반환 값 에러 처리
-                    ResponseErrorState.Success(data = body as T)
+                // 메세지 분기 처리
+                return when(this.message()){
+                    "SUCCESS" -> {
+                        val body = this.body()
+                        return if(body == null) ResponseErrorState.Error(failure = Failure.UnHandleError())
+                        else ResponseErrorState.Success(data = body as T)
+                    }
+                    "INFO-200" -> ResponseErrorState.Error(failure = Failure.NonKeywordRequest)
+                    "ERROR-500" -> ResponseErrorState.Error(failure = Failure.ServerErr)
+                    "INFO-100" -> ResponseErrorState.Error(failure = Failure.ExpiredKeyErr)
+                    "ERROR-300" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-301" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-310" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-331" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-332" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-333" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-334" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-335" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-336" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    "ERROR-600" -> ResponseErrorState.Error(failure = Failure.UnHandleError())
+                    else -> ResponseErrorState.Error(failure = Failure.UnHandleError())
                 }
             }
         }

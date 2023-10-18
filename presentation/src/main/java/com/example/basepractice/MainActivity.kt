@@ -1,5 +1,6 @@
 package com.example.basepractice
 
+import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -30,30 +32,21 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MyViewModel by viewModels()
     private val adapter: MyAdapter by lazy { MyAdapter() }
     private lateinit var binding: ActivityMainBinding
-    private var count = 1
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         initObserver()
         initListener()
         initRecycler()
     }
 
     private fun initListener(){
-//        binding.refresh.setOnRefreshListener {
-//            binding.refresh.isRefreshing = false
-//            adapter.dataList.clear()
-//            viewModel.getApiData("${count++}")
-//        }
-
         binding.searchTxt.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
             override fun afterTextChanged(p0: Editable?) {
                 val newList = mutableListOf<String>()
                 resources.getStringArray(R.array.placeName_array).forEach { if(it.contains("$p0")) newList.add(it) }
@@ -63,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         adapter.onClickData = {
+            binding.include.dataComponent.visibility = View.INVISIBLE
             lifecycleScope.launch {
                 viewModel.getApiData(it)
             }
@@ -85,14 +79,13 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.myChannel.collectLatest {
-                    Log.e("TAG", "initObserver: $it", )
                     when(it){
                         is ResourceState.Success -> {
-//                            adapter.dataList.add(it.data) // TODO 이렇게 넣으면 값이 안바뀜
-                            binding.dataTxt.text = "${it.data}"
+                            binding.include.root.isVisible = true
+                            binding.include.data = it.data
                         }
                         is ResourceState.Error -> {
-                            Toast.makeText(applicationContext, "${it.failure}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, it.failure.message, Toast.LENGTH_SHORT).show()
                         }
                         else -> {
 
@@ -107,5 +100,11 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(application)
         binding.recyclerView.adapter = adapter
         adapter.dataList = resources.getStringArray(R.array.placeName_array).toMutableList()
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - backPressedTime < 2500) { finish() }
+        Toast.makeText(this, "한번 더 클릭 시 종료됩니다.", Toast.LENGTH_SHORT).show()
+        backPressedTime = System.currentTimeMillis()
     }
 }

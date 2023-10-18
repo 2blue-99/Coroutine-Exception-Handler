@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.example.domain.model.MyTestData" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/data_component"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:gravity="center">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textSize="12sp"
+                android:text="@{`최근 [`+data.areaName+`] 인구분포 레벨`, default=`최근 김포공항 인구분포 레벨`}"
+                android:id="@+id/areaNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:textStyle="italic"
+            android:textSize="40sp"
+            android:text="@{data.areaStateLevel, default=`레벨`}"
+            android:id="@+id/areaStateLevelTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="최소 인구 수"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.areaMin + `명`, default=`5000명`}"
+                android:gravity="right"
+                android:id="@+id/minTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="최대 인구 수"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.areaMax + `명`, default=`50000명`}"
+                android:gravity="right"
+                android:id="@+id/maxTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="남성 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.maleRate + `%`, default=`50%`}"
+                android:gravity="right"
+                android:id="@+id/manRateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="여성 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.femaleRate + `%`, default=`5000명`}"
+                android:gravity="right"
+                android:id="@+id/womanRateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="10대 미만 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.rate0 + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/rate0Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="10대 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.rate10 + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/rate10Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="20대 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.rate20 + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/rate20Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="30대 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.rate30 + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/rate30Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="40대 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:gravity="right"
+                android:text="@{data.rate40 + `%`, default=`10%`}"
+                android:layout_gravity="right"
+                android:id="@+id/rate40Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="50대 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.rate50 + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/rate50Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="60대 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.rate60 + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/rate60Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="70대 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.rate70 + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/rate70Txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="거주 인원 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.resntRate + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/resntRateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="비 상주 인원 비율"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.nonResntRate + `%`, default=`10%`}"
+                android:gravity="right"
+                android:id="@+id/nonResntRateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="데이터 관측 시간"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.updateTime, default=`2023-10-18 18:00`}"
+                android:gravity="right"
+                android:id="@+id/updateTimeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:textStyle="italic"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="12sp"
+            android:text="@{data.areaStateMassage, default=`메시지`}"
+            android:id="@+id/massageTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

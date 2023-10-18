@@ -10,7 +10,7 @@ import com.example.domain.model.MyTestData
 object DataMapper {
     fun mapperToMyData(serverTestData: ServerTestData): MyTestData =
         MyTestData(
-            areaName = serverTestData.dataList.AREA_NM,
+            areaName = serverTestData.dataList!!.AREA_NM,
             areaStateLevel = serverTestData.dataList.AREA_CONGEST_LVL,
             areaStateMassage = serverTestData.dataList.AREA_CONGEST_MSG,
             areaMin = serverTestData.dataList.AREA_PPLTN_MIN,

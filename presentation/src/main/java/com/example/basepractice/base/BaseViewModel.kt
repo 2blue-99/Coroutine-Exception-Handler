@@ -29,9 +29,10 @@ open class BaseViewModel: ViewModel() {
 
     protected val waitTime = 4000L
 
-    private val job = SupervisorJob()
+    protected val job = SupervisorJob()
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.e("TAG", "coroutine exception handler : $coroutineContext, $throwable: ", )
         isLoading.postValue(false)
         job.cancel()
         coroutineContext.job.cancel()

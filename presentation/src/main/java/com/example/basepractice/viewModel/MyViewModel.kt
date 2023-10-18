@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.withTimeoutOrNull
 
 import javax.inject.Inject
 
@@ -64,6 +65,8 @@ class MyViewModel @Inject constructor(
         }.catch { exception ->
             Log.e("TAG", "viewModel exception: $exception", )
             _myChannel.send(ResourceState.Error(failure = Failure.UnHandleError(exception.message ?: "")))
+            isLoading.postValue(false)
+            throw exception
         }.launchIn(modelScope)
     }
 }

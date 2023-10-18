@@ -11,7 +11,7 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml(name = "Map")
 data class ServerTestData(
     @Element
-    val dataList: DataList,
+    val dataList: DataList?,
 )
 
 @Xml(name = "SeoulRtd.citydata_ppltn")
