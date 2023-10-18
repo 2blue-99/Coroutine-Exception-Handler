@@ -16,8 +16,6 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyHolder>() {
 
     private lateinit var cardBinding: ItemBinding
     lateinit var onClickData: (String) -> Unit
-    lateinit var onClickRefresh: () -> Unit
-    private val positionList = mutableListOf<Int>()
 
     var dataList = mutableListOf<String>()
         set(value) {
@@ -29,15 +27,10 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String, position: Int) {
             binding.data = item
-
-            Log.e("TAG", "positionList: $positionList", )
-
-            if(positionList.contains(position))
-                binding.listLayout.setBackgroundColor(Color.GRAY)
+//            if(positionList.contains(position))
+//                binding.listLayout.setBackgroundColor(Color.GRAY)
 
             binding.listLayout.setOnClickListener{
-                positionList.clear()
-                positionList.add(position)
                 onClickData(item)
             }
         }

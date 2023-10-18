@@ -17,7 +17,7 @@ class RepoImpl @Inject constructor(
     override suspend fun getAPIRepo(placeName: String): ResourceState<MyTestData> {
         return when(val response = dataSource.getApiDataSource(placeName)){
             is ResourceState.Success -> ResourceState.Success(data = DataMapper.mapperToMyData(response.data))
-            else -> ResourceState.Error(failure = (response as ResourceState.Error).failure )
+            else -> ResourceState.Error(failure = (response as ResourceState.Error).failure) // TODO 이쪽 처리에 대해 물어보기
         }
     }
 }

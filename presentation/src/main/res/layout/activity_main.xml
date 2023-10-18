@@ -17,36 +17,82 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/refresh"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/item" />
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-            <View
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/lightGray"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"/>
-
+            android:orientation="vertical">
             <TextView
                 android:gravity="center"
-                android:id="@+id/dataTxt"
-                android:text="내용"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:textSize="20dp"
+                android:text="서울 키워드별 인구 검색"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="9">
+
+                <AutoCompleteTextView
+                    android:id="@+id/searchTxt"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="12sp"
+                    android:hint="아래 목록 중 하나의 키워드를 입력해주세요."
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/round_gray_outline"
+                    android:imeOptions="actionDone"
+                    android:maxLength="15"/>
+
+                <ImageView
+                    android:id="@+id/searchBtn"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="8"
+                    android:src="@drawable/magnifying"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item" />
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                <View
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/lightGray"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"/>
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/dataTxt"
+                    android:text="내용"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+            </LinearLayout>
         </LinearLayout>
+
 
 
 

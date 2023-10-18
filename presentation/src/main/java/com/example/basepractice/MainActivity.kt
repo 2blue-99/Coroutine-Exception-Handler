@@ -3,6 +3,8 @@ package com.example.basepractice
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -47,15 +49,29 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.getApiData("${count++}")
 //        }
 
-        adapter.onClickRefresh = {
-        }
+        binding.searchTxt.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                val newList = mutableListOf<String>()
+                resources.getStringArray(R.array.placeName_array).forEach { if(it.contains("$p0")) newList.add(it) }
+                adapter.dataList = newList
+            }
+
+        })
 
         adapter.onClickData = {
             lifecycleScope.launch {
-                adapter.dataList = resources.getStringArray(R.array.placeName_array).toMutableList()
                 viewModel.getApiData(it)
             }
+        }
 
+        binding.searchBtn.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.getApiData("${binding.searchTxt.text}")
+            }
         }
     }
 

@@ -19,6 +19,7 @@ class DataSourceImpl @Inject constructor(
 
     suspend fun getApiDataSource(placeName: String): ResourceState<ServerTestData> {
         val response = retrofit.getApiDataSource(placeName)
+        Log.e("TAG", "getApiDataSource: $response", )
         return when(val response = response.errorHandler()){
             is ResponseErrorState.Success ->
                 ResourceState.Success(data = response.data)

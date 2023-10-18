@@ -62,6 +62,7 @@ class MyViewModel @Inject constructor(
                 }
             }
         }.catch { exception ->
+            Log.e("TAG", "viewModel exception: $exception", )
             _myChannel.send(ResourceState.Error(failure = Failure.UnHandleError(exception.message ?: "")))
         }.launchIn(modelScope)
     }
