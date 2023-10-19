@@ -19,9 +19,12 @@ import com.example.basepractice.databinding.ActivityMainBinding
 import com.example.basepractice.viewModel.MyViewModel
 import com.example.domain.state.ResourceState
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 
 @AndroidEntryPoint
@@ -92,6 +95,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        viewModel.fetchState.observe(this){
+            Toast.makeText(this, "${it.second}", Toast.LENGTH_SHORT).show()
         }
     }
 

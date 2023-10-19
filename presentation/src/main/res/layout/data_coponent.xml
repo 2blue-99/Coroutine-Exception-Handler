@@ -37,7 +37,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <LinearLayout
+
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="데이터 관측 시간"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:text="@{data.updateTime, default=`2023-10-18 18:00`}"
+                android:gravity="right"
+                android:id="@+id/updateTimeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"
@@ -358,29 +382,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <TextView
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:text="데이터 관측 시간"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:text="@{data.updateTime, default=`2023-10-18 18:00`}"
-                android:gravity="right"
-                android:id="@+id/updateTimeTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+
         <TextView
             android:textStyle="italic"
             android:layout_marginLeft="10dp"

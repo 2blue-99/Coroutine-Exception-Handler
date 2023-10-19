@@ -36,13 +36,6 @@ class MyViewModel @Inject constructor(
 
     val loading: MutableLiveData<Boolean> get() = isLoading
 
-//    private var _liveData = MutableLiveData<MyData>()
-//    val liveData: LiveData<MyData> get() = _liveData
-
-    /// Flow
-//    private val _response = MutableStateFlow<ResourceState<MyData>>(ResourceState.Loading())
-//    val response: StateFlow<ResourceState<MyData>> get() = _response
-
     private val  _myStateFlow = MutableSharedFlow<ResourceState<MyTestData>>()
     val myStateFlow : SharedFlow<ResourceState<MyTestData>> get() = _myStateFlow
 
@@ -62,11 +55,6 @@ class MyViewModel @Inject constructor(
                     isLoading.postValue(true)
                 }
             }
-        }.catch { exception ->
-            Log.e("TAG", "viewModel exception: $exception", )
-            _myStateFlow.emit(ResourceState.Error(failure = Failure.UnHandleError(exception.message ?: "")))
-            isLoading.postValue(false)
-            throw exception
         }.launchIn(modelScope)
     }
 }

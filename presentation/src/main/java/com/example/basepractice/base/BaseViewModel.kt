@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basepractice.util.FetchState
+import com.example.domain.util.Constants
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.job
@@ -24,29 +25,24 @@ import java.lang.NullPointerException
 open class BaseViewModel: ViewModel() {
     protected val isLoading = MutableLiveData(false)
 
-    private var _fetchState = MutableLiveData<Pair<Throwable, FetchState>>()
-    val fetchState : LiveData<Pair<Throwable, FetchState>> get() = _fetchState
+    private var _fetchState = MutableLiveData<Pair<Throwable, String>>()
+    val fetchState : LiveData<Pair<Throwable, String>> get() = _fetchState
 
-    protected val waitTime = 4000L
-
-    protected val job = SupervisorJob()
+    private val job = SupervisorJob()
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-        Log.e("TAG", "coroutine exception handler : $coroutineContext, $throwable: ", )
+        Log.e("TAG", "coroutine exception handler : $throwable: ", )
         isLoading.postValue(false)
-        job.cancel()
         coroutineContext.job.cancel()
         throwable.printStackTrace()
         when(throwable){
-            is SocketException -> _fetchState.value = Pair(throwable, FetchState.BAD_INTERNET)
-            is HttpException -> _fetchState.value = Pair(throwable, FetchState.PARSE_ERROR)
-            is UnknownHostException -> _fetchState.value = Pair(throwable, FetchState.WRONG_CONNECTION)
-            is SQLiteConstraintException -> _fetchState.value = Pair(throwable, FetchState.SQLITE_CONSTRAINT_PRIMARY_KEY)
-            is SocketTimeoutException -> _fetchState.value = Pair(throwable, FetchState.SOCKET_TIMEOUT_EXCEPTION)
-            is IllegalStateException -> _fetchState.value = Pair(throwable, FetchState.ILLEGAL_STATE_EXCEPTION)
-            else -> _fetchState.value = Pair(throwable, FetchState.FAIL)
+            is SocketException -> _fetchState.value = Pair(throwable, Constants.TOAST_ERROR_INTERNET_CONNECTED)
+            is HttpException -> _fetchState.value = Pair(throwable, Constants.TOAST_ERROR_PARSE_ERROR)
+            is UnknownHostException -> _fetchState.value = Pair(throwable, Constants.TOAST_ERROR_WRONG_CONNECTION)
+            is SocketTimeoutException -> _fetchState.value = Pair(throwable, Constants.TOAST_ERROR_SOCKET_TIMEOUT)
+            is IllegalStateException -> _fetchState.value = Pair(throwable, Constants.TOAST_ERROR_ILLEGAL_STATE)
+            else -> _fetchState.value = Pair(throwable, Constants.TOAST_ERROR_UNHANDLED)
         }
     }
-
     protected val modelScope = viewModelScope + job + exceptionHandler
 }

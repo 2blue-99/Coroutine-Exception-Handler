@@ -35,6 +35,7 @@ object RetrofitModule {
     @Provides
     fun provideOkhttpApi(networkInterceptor: NetworkInterceptor): OkHttpClient =
         OkHttpClient().newBuilder()
+            .connectTimeout(300L, TimeUnit.MILLISECONDS)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
@@ -46,7 +47,6 @@ object RetrofitModule {
                 response
             }
             .addInterceptor(networkInterceptor)
-            .connectTimeout(300, TimeUnit.MILLISECONDS)
             .build()
 
     @Singleton
