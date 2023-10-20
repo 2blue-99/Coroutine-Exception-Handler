@@ -25,6 +25,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
+    private var gson: Gson = GsonBuilder().setLenient().create()
+
     private val PRIVATE_KEY = "575a7a59456c706d34374c474c676c"
 
     @Singleton
@@ -53,8 +55,9 @@ object RetrofitModule {
     @Provides
     fun provideRetrofit(interceptorClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("http://openapi.seoul.go.kr:8088/${PRIVATE_KEY}/xml/")
+            .baseUrl("http://openapi.seoul.go.kr:8088/${PRIVATE_KEY}/json/")
             .client(interceptorClient)
-            .addConverterFactory(TikXmlConverterFactory.create(TikXml.Builder().exceptionOnUnreadXml(false).build()))
+            .addConverterFactory(GsonConverterFactory.create(gson))
+//            .addConverterFactory(TikXmlConverterFactory.create(TikXml.Builder().exceptionOnUnreadXml(false).build()))
             .build()
 }

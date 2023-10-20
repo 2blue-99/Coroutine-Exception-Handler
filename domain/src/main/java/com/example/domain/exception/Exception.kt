@@ -7,3 +7,4 @@ package com.example.domain.exception
 
 class NonDataException(code: String): Exception(code)
 class ServerErrException(code: String): Exception(code)
+class KeyExpiredException(code: String): Exception(code)

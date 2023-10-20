@@ -58,4 +58,6 @@ dependencies {
     implementation ("com.tickaroo.tikxml:retrofit-converter:0.8.13")
     kapt ("com.tickaroo.tikxml:processor:0.8.13")
     implementation ("org.simpleframework:simple-xml:2.7.1")
+
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 }

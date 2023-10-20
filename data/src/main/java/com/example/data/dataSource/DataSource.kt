@@ -1,6 +1,6 @@
 package com.example.data.dataSource
 
-import com.example.data.model.ServerTestData
+import com.example.data.model.ServerData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,5 +13,5 @@ interface DataSource {
     @GET("citydata_ppltn/1/5/{placeName}")
     suspend fun getApiDataSource(
         @Path("placeName") placeName: String
-    ):Response<ServerTestData>
+    ):Response<ServerData>
 }
